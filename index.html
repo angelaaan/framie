@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Framie</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <!--LANDING PAGEE EEE WELCOME USERS-->
+    <main class="screen landing" id="screen-home">
+        <!-- Top lace -->
+        <div class="lace lace-top"></div>
+
+        <p class="sub">bring your pinterest board to life</p>
+
+        <div class="brandUnit">
+            <img src="./assets/angelWings.png" alt="" class="brandWings" aria-hidden="true" />
+            <h1 class="logo">Framie</h1>
+            
+        </div>
+
+        <!-- Buttons -->
+        <div class="btnRow">
+            <button class="btn" id="goInspo">inspo</button>
+            <button class="btn" id="goAlbum">album</button>
+        </div>
+
+        <!-- Bottom lace -->
+        <div class="lace lace-bottom"></div>
+    </main>
+
+    <main class="screen hidden" id="screen-inspo">
+        <header class="topbar">
+            <button class="iconBtn" id="backHome" aria-label="Back">←</button>
+            <h2>Inspo Groups</h2>
+            <button class="iconBtn" id="newGroup" aria-label="New group">+</button>
+        </header>
+
+        <section class="content">
+            <div class="groups" id="groupsList"></div>
+            <p class="hint" id="emptyHint">No groups yet!! Tap + to add one.</p>
+        </section>
+    </main>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
