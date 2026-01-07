@@ -27,6 +27,16 @@ body{
   font-size: 25px;
 }
 
+h1{
+  font-family: "Brittany Signature", cursive;
+  font-size: 76px;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  justify-content: center;
+  line-height: 1;
+  margin-top: 0px;
+}
+
 /* =========================
    Screen Layout
    ========================= */
@@ -127,7 +137,7 @@ body{
 .btn{
   flex: 1;
   padding: 14px 16px;
-  border-radius: 16px;
+  border-radius: 999px;
 
   font-family: "Winkle";
   font-weight: 700;
@@ -143,3 +153,134 @@ body{
 .btn:disabled{
   opacity: 0.5;
 }
+/* =========================
+   Shared UI (Topbar + Content)
+   ========================= */
+
+.topbar{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 52px 1fr 52px;
+  align-items: center;
+  padding: 18px 16px;
+}
+
+.iconBtn{
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 3px solid #000;
+  background: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  margin-left: 30px;
+}
+.iconSpacer{
+  width: 44px;
+  height: 44px;
+}
+.content{
+  width: min(420px, 92vw);
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* =========================
+   Inspo Groups Grid
+   ========================= */
+
+#screen-inspo, #screen-create {
+  background-image: url("./assets/landing-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Allow scrolling ONLY on inspo screen */
+#screen-inspo{
+  overflow-y: auto;      /* can scroll */
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
+}
+
+.fixedButton{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
+  z-index: 50;
+
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 3px solid #000;
+  background: #000;
+  color: #fff;
+
+  font-family: "Winkle", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 25px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.groups{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  padding: 10px 0 0;
+}
+
+.groupCard{
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  border: 3px solid #000;
+  background: rgba(160,160,160,0.9);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.groupCard span{
+  font-family: "Winkle", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 30px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+}
+
+/* hint text */
+.hint{
+  margin: 10px 0 0;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+/* =========================
+   Create Group Form
+   ========================= */
+
+.label{
+  font-size: 30px;
+  letter-spacing: 2px;
+  margin-top: 45px;
+  margin-bottom: 5px;
+}
+
+.textInput{
+  width: min(300px, 78vw);
+  padding: 14px 14px;
+  border-radius: 12px;
+  border: 3px solid #000;
+  background: rgba(160,160,160,0.9);
+  font-family: "Winkle", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  outline: none;
+
+  margin: 10px 0px 20px;
+}
+

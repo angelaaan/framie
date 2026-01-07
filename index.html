@@ -31,16 +31,39 @@
         <div class="lace lace-bottom"></div>
     </main>
 
+    <!--INSPO GROUPS PAGE-->
     <main class="screen hidden" id="screen-inspo">
         <header class="topbar">
             <button class="iconBtn" id="backHome" aria-label="Back">←</button>
-            <h2>Inspo Groups</h2>
-            <button class="iconBtn" id="newGroup" aria-label="New group">+</button>
         </header>
-
+        <h1>inspos</h1>
+        <button class="fixedButton" id="newGroup" aria-label="New group">+group</button>
+        <!--IF THERE IS NO GROUPS-->
         <section class="content">
             <div class="groups" id="groupsList"></div>
             <p class="hint" id="emptyHint">No groups yet!! Tap + to add one.</p>
+        </section>
+    </main>
+
+    <!-- CREATE GROUP SCREEN -->
+    <main class="screen hidden" id="screen-create">
+        <header class="topbar">
+            <button class="iconBtn" id="backToInspo" aria-label="Back">←</button>
+        </header>
+        <h1>create group</h1>
+            <span class="iconSpacer" aria-hidden="true"></span>
+
+        <section class="content">
+            <label class="label" for="groupName">GROUP NAME</label>
+            <input
+            class="textInput"
+            id="groupName"
+            type="text"
+            placeholder="insert group name"
+            maxlength="24"
+            autocomplete="off"
+            />
+            <button class="btn primary" id="createGroupBtn" disabled>create</button>
         </section>
     </main>
 
