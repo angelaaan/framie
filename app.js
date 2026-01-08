@@ -122,6 +122,17 @@ function addGroup(name) {
     });
 }
 
+// delete group
+function deleteGroup(groupId) {
+  return withStore(STORE_GROUPS, "readwrite", (store) => {
+    return new Promise((resolve, reject) => {
+      const req = store.delete(groupId);
+      req.onsuccess = () => resolve(true);
+      req.onerror = () => reject(req.error);
+    });
+  });
+}
+
 //UI rendering --------------------
 
 async function renderGroups() {
@@ -154,11 +165,51 @@ async function renderGroups() {
         card.className = "groupCard"; //styling
         card.innerHTML = `<span>${g.name}</span>`; //g.name
 
-        // click behaviour
+        //long press to show the delete option
+        let pressTimer = null;
+        let didLongPress = false;
+
+        const startPress = () => {
+            didLongPress = false;
+            pressTimer = window.setTimeout(async () => {
+                didLongPress = true;
+
+                const ok = confirm(`Delete group "${g.name}"? This can't be undone.`);
+                if (!ok) return;
+
+                try {
+                await deleteGroup(g.id);
+                await renderGroups();
+                } catch (err) {
+                console.error(err);
+                alert("Something went wrong deleting the group.");
+                }
+            }, 550); // long-press threshold (ms)
+        };
+
+        const cancelPress = () => {
+            if (pressTimer) window.clearTimeout(pressTimer);
+            pressTimer = null;
+        };
+
+        // Pointer events work great for mouse + touch
+        card.addEventListener("pointerdown", (e) => {
+            // only primary press
+            if (e.button !== undefined && e.button !== 0) return;
+            card.setPointerCapture?.(e.pointerId);
+            startPress();
+        });
+
+        card.addEventListener("pointerup", cancelPress);
+        card.addEventListener("pointercancel", cancelPress);
+        card.addEventListener("pointerleave", cancelPress);
+
+        // Normal tap = open group (but NOT if a long-press already happened)
         card.addEventListener("click", () => {
-            // stub: group page comes next
+            if (didLongPress) return; // prevents the click after long press
             alert(`Open group: ${g.name} (group page next)`);
         });
+
         list.appendChild(card);
   }
 }
