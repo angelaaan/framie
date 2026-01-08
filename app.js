@@ -123,12 +123,13 @@ function addGroup(name) {
 }
 
 // delete group
-function deleteGroup(groupId) {
-  return withStore(STORE_GROUPS, "readwrite", (store) => {
-    return new Promise((resolve, reject) => {
-      const req = store.delete(groupId);
-      req.onsuccess = () => resolve(true);
-      req.onerror = () => reject(req.error);
+function deleteGroup(groupId) { // deletes via id
+  return withStore(STORE_GROUPS, "readwrite", (store) => {  //gives perms to the desired groups table
+    return new Promise((resolve, reject) => { 
+        //delete call
+        const req = store.delete(groupId);
+        req.onsuccess = () => resolve(true);
+        req.onerror = () => reject(req.error);
     });
   });
 }
@@ -158,7 +159,7 @@ async function renderGroups() {
 
     //loop thru the groups
     for (const g of groups) {
-        // create each group card from scratch 
+        // create each group card
         const card = document.createElement("button");
         //defines the 
         card.type = "button"; //semantics
@@ -169,24 +170,27 @@ async function renderGroups() {
         let pressTimer = null;
         let didLongPress = false;
 
+        // starting the long press
         const startPress = () => {
             didLongPress = false;
             pressTimer = window.setTimeout(async () => {
                 didLongPress = true;
 
+                //confirm + delete logic
                 const ok = confirm(`Delete group "${g.name}"? This can't be undone.`);
                 if (!ok) return;
-
+                //try catch lock
                 try {
-                await deleteGroup(g.id);
-                await renderGroups();
+                    await deleteGroup(g.id); //removes from indexedDB
+                    await renderGroups();
                 } catch (err) {
-                console.error(err);
-                alert("Something went wrong deleting the group.");
+                    console.error(err);
+                    alert("Something went wrong deleting the group.");
                 }
             }, 550); // long-press threshold (ms)
         };
 
+        //prevents accidental deletes if user lets go early/moves finger away.cancels touch
         const cancelPress = () => {
             if (pressTimer) window.clearTimeout(pressTimer);
             pressTimer = null;
@@ -200,6 +204,7 @@ async function renderGroups() {
             startPress();
         });
 
+        //time the hold
         card.addEventListener("pointerup", cancelPress);
         card.addEventListener("pointercancel", cancelPress);
         card.addEventListener("pointerleave", cancelPress);
