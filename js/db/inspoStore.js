@@ -1,14 +1,19 @@
+//database api for inspo photos
 import { STORE_INSPO, withStore } from "./db.js";
 
-//
+//input current group id + files picked from camera roll
 export function addInspoFiles(groupId, files) {
   const now = Date.now();
   const arr = Array.from(files || []);
 
   return withStore(STORE_INSPO, "readwrite", (store) => {
+    //returns promise when all files are saved
     return Promise.all(
+        //loops each file and store.add(record) into IndexedDB
       arr.map(
         (file, i) =>
+        
+            //every inspo is owned by a groupId
           new Promise((resolve, reject) => {
             const record = {
               id: crypto.randomUUID(),
@@ -28,7 +33,7 @@ export function addInspoFiles(groupId, files) {
   });
 }
 
-// 
+// fetches all the photos already in that group
 export function listInspoByGroup(groupId) {
   return withStore(STORE_INSPO, "readonly", (store) => {
     return new Promise((resolve, reject) => {
@@ -40,7 +45,7 @@ export function listInspoByGroup(groupId) {
   });
 }
 
-//
+//input photo id to delete record from the store
 export function deleteInspo(id) {
   return withStore(STORE_INSPO, "readwrite", (store) => {
     return new Promise((resolve, reject) => {

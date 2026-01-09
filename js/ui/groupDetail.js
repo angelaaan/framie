@@ -3,9 +3,10 @@ import { SCREENS, showScreen } from "./screens.js";
 import { listInspoByGroup, deleteInspo } from "../db/inspoStore.js";
 import { getGroup } from "../db/groupsStore.js"; 
 
+//used to keep track of which group is actually open so opening a group card sets it
 let currentGroupId = null;
 
-// opening group
+// set groupID to current group
 export function getCurrentGroupId() {
   return currentGroupId;
 }
@@ -22,20 +23,25 @@ export async function renderGroupDetail() {
   const grid = $("inspoGrid");
   const emptyHint = $("emptyInspoHint");
 
+  //clears the grid
   grid.innerHTML = "";
 
+  //loads group info
   const group = await getGroup(currentGroupId);
-  title.textContent = group ? group.name : "group";
+  title.textContent = group.name;
 
+  //load that groups photos
   const photos = await listInspoByGroup(currentGroupId);
   photos.sort((a, b) => b.createdAt - a.createdAt);
 
+  //if not photos show hint
   if (!photos.length) {
     emptyHint.classList.remove("hidden");
     return;
   }
   emptyHint.classList.add("hidden");
 
+  //otherwise for each photo create button and show img
   for (const p of photos) {
     const tile = document.createElement("button");
     tile.type = "button";
