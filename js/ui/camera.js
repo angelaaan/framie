@@ -4,9 +4,11 @@ import { SCREENS, showScreen } from "./screens.js";
 import { listInspoByGroup } from "../db/inspoStore.js";
 import { addCameraPhoto } from "../db/cameraStore.js";
 import { getCurrentGroupId, renderGroupDetail } from "./groupDetail.js";
+import { openAlbum } from "./album.js";
 
 let stream = null;
 let activeOverlayUrl = null;
+let facingMode = "environment";
 
 function revokeOverlayUrl() {
   if (activeOverlayUrl && activeOverlayUrl.startsWith("blob:")) {
@@ -21,7 +23,7 @@ async function startCamera() {
 
   //invokes the devices camera
   stream = await navigator.mediaDevices.getUserMedia({
-    video: { facingMode: "environment" },
+    video: { facingMode },
     audio: false,
   });
 
@@ -186,10 +188,14 @@ export function initCameraScreen() {
     await renderGroupDetail();
   });
 
-  // album (bottom-right) — placeholder for now
-  $("cameraAlbumBtn").addEventListener("click", () => {
-    stopCamera();
-    revokeOverlayUrl();
-    alert("Album screen next!! (Sprint 4 vibe)"); // swap later
+  // flip camera
+  $("cameraFlipBtn").addEventListener("click", async () => {
+    facingMode = facingMode === "environment" ? "user" : "environment";
+    try {
+      await startCamera();
+    } catch (err) {
+      console.error(err);
+      alert("Could not flip camera.");
+    }
   });
 }

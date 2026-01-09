@@ -9,6 +9,7 @@ export function addCameraPhoto(groupId, blob) {
     createdAt: Date.now(),
     blob,
     mime: blob.type || "image/jpeg",
+    lifespan: 0
   };
 
   return withStore(STORE_CAMERA, "readwrite", (store) => {
@@ -25,6 +26,16 @@ export function listCameraPhotosByGroup(groupId) {
     return new Promise((resolve, reject) => {
       const idx = store.index("groupId");
       const req = idx.getAll(IDBKeyRange.only(groupId));
+      req.onsuccess = () => resolve(req.result || []);
+      req.onerror = () => reject(req.error);
+    });
+  });
+}
+
+export function listAllCameraPhotos() {
+  return withStore(STORE_CAMERA, "readonly", (store) => {
+    return new Promise((resolve, reject) => {
+      const req = store.getAll();
       req.onsuccess = () => resolve(req.result || []);
       req.onerror = () => reject(req.error);
     });

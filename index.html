@@ -24,7 +24,7 @@
         <!-- Buttons -->
         <div class="btnRow">
             <button class="btn" id="goInspo">inspo</button>
-            <button class="btn" id="goAlbum">album</button>
+            <button class="btn" id="goAlbumHome">album</button>
         </div>
 
         <!-- Bottom lace -->
@@ -93,7 +93,7 @@
         />
     </main>
 
-    <section id="screen-camera" class="screen hidden">
+    <section class="screen hidden" id="screen-camera">
         <div class="camera-top">
             <div id="cameraCarousel" class="carousel"></div>
         </div>
@@ -116,12 +116,35 @@
             <button id="shutterBtn" class="shutter" aria-label="Take photo"></button>
         </div>
 
+        <button id="cameraFlipBtn" class="corner-btn mid" aria-label="Flip camera">⇄</button>
         <button id="cameraBackBtn" class="corner-btn left" aria-label="Back">↩</button>
-        <button id="cameraAlbumBtn" class="corner-btn right" aria-label="Album">☐</button>
+        <button id="goAlbumCamera" class="corner-btn right" aria-label="Album">☐</button>
 
         <canvas id="captureCanvas" class="hidden"></canvas>
     </section>
 
+    <!--ALBUM SCREEN-->
+    <main class="screen hidden" id="screen-album">
+        <header class="topbar">
+            <button class="iconBtn" id="backToHomeFromAlbum" aria-label="Back">←</button>
+            <span class="iconSpacer" aria-hidden="true"></span>
+        </header>
+
+        <h1>album</h1>
+        <p class="sub">remember to save your photos !! </p>
+
+        <section class="content">
+            <div class="inspoGrid" id="albumGrid"></div>
+            <p class="hint hidden" id="emptyAlbumHint">No photos yet ˙ᵕ˙</p>
+        </section>
+    </main>
+
+    <!-- simple viewer overlay -->
+    <section class="hidden" id="albumViewer">
+        <button class="iconBtn" id="closeViewer" aria-label="Close">←</button>
+        <img id="viewerImg" alt="" />
+        <button class="btn" id="saveToGalleryBtn">save to gallery</button>
+    </section>
 
     <script type="module" src="./js/main.js"></script>
 </body>

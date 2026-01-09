@@ -4,6 +4,7 @@ import { renderGroups } from "./groups.js";
 import { addInspoFiles } from "../db/inspoStore.js";
 import { getCurrentGroupId, renderGroupDetail } from "./groupDetail.js";
 import { openCamera } from "./camera.js";
+import { openAlbum } from "./album.js";
 
 export function initNavigation() {
     //what happens when user clicks [inspo] button from landing page
@@ -13,8 +14,15 @@ export function initNavigation() {
     });
 
     //what happens when user clicks [album] button from landing page
-    $("goAlbum").addEventListener("click", () => {
-        alert("Album page next after groups !!!"); // TO DO !! ADD ALBUM PAGE
+    $("goAlbumHome").addEventListener("click", async () => {
+        showScreen(SCREENS.album);
+        await openAlbum();
+    });
+    $("goAlbumCamera").addEventListener("click", async () => {
+        console.log("SCREENS =", SCREENS);
+        console.log("album clicked");
+        showScreen(SCREENS.album);
+        await openAlbum();
     });
 
     // what happens when user clicks the back button to go to home page

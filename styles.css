@@ -22,7 +22,8 @@
 
 html, body{
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body{
@@ -98,7 +99,6 @@ h1{
 .sub{
   margin-top: 75px;
   text-align: center;
-  max-width: 350px;
 }
 
 /* Brand unit (wings + logo move together) */
@@ -197,7 +197,7 @@ h1{
    Inspo Groups Grid
    ========================= */
 
-#screen-inspo, #screen-create {
+#screen-inspo, #screen-create{
   background-image: url("./assets/landing-bg.png");
   background-size: cover;
   background-position: center;
@@ -293,7 +293,7 @@ h1{
    Group Detail (Inspo Grid)
    ========================= */
 
-#screen-group{
+#screen-group, #screen-album {
   background-image: url("./assets/landing-bg.png");
   background-size: cover;
   background-position: center;
@@ -374,6 +374,10 @@ h1{
   overflow: hidden;
 }
 
+#screen-camera.hidden {
+  display: none;
+}
+
 /* TOP CAROUSEL */
 .camera-top {
   width: 100%;
@@ -448,8 +452,7 @@ h1{
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  margin-top: 5px;
   padding: 14px;
   background: #000;
 }
@@ -479,7 +482,7 @@ h1{
   border-radius: 50%;
   background: #fff;
   border: none;
-  margin: 25px auto;
+  margin: 22px auto;
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15);
 }
 
@@ -498,4 +501,39 @@ h1{
 
 .corner-btn.left { left: 18px; }
 .corner-btn.right { right: 18px; }
+.corner-btn.mid {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ALBUM */
+
+#screen-album, .sub{
+  margin-top: -5px;
+}
+
+#albumViewer{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.85);
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+#viewerImg{
+  margin-top: 20px;
+  max-width: 92vw;
+  max-height: auto;
+  border-radius: 14px;
+  border: 3px solid #000;
+  object-fit: contain;
+  background: #111;
+}
 

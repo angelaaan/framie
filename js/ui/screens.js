@@ -6,6 +6,7 @@ export const SCREENS = {
   create: "screen-create",
   group: "screen-group",
   camera: "screen-camera",
+  album: "screen-album",
 };
 
 export function showScreen(screenId) {
