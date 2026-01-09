@@ -5,6 +5,7 @@ export const SCREENS = {
   inspo: "screen-inspo",
   create: "screen-create",
   group: "screen-group",
+  camera: "screen-camera",
 };
 
 export function showScreen(screenId) {

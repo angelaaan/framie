@@ -312,6 +312,25 @@ h1{
   z-index: 50;
 }
 
+/* --- Group screen: split the two fixed buttons --- */
+#screen-group #addInspo,
+#screen-group #openCamera{
+  position: fixed;
+  bottom: 40px;
+  z-index: 50;
+  transform: none; 
+}
+
+/* left button */
+#screen-group #addInspo{
+  left: 18px;
+}
+/* right button */
+#screen-group #openCamera{
+  right: 18px;
+  left: auto;
+}
+
 .inspoGrid{
   width: 100%;
   display: grid;
@@ -342,5 +361,141 @@ h1{
   height: 100%;
   object-fit: cover;
 
-  display: block;          /* ✅ removes inline img gaps */
+  display: block;
 }
+
+/* SCREEN */
+#screen-camera {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+/* TOP CAROUSEL */
+.camera-top {
+  width: 100%;
+  padding: 15px 10px 6px;
+  background: #000;
+}
+
+.carousel {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 0px;
+}
+
+.carousel-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  object-fit: cover;
+  opacity: 0.9;
+  border: 2px solid transparent;
+  flex: 0 0 auto;
+}
+
+.carousel-thumb.is-selected {
+  border-color: #f5a3c7;
+  opacity: 1;
+}
+
+/* 4:3 CAMERA VIEWPORT */
+.camera-viewport {
+  width: 100%;
+  aspect-ratio: 3 / 4; /* your requirement */
+  position: relative;
+  overflow: hidden;
+  background: #222;
+  margin-top: 10px;
+}
+
+.camera-viewport video,
+.camera-viewport img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding-top: 0px;
+}
+
+.camera-viewport video {
+  z-index: 1;
+}
+
+#cameraOverlay {
+  z-index: 2;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* CONTROLS */
+.camera-controls {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 14px;
+  background: #000;
+}
+
+/* Pink slider (light -> dark) */
+#opacitySlider {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  appearance: none;
+  background: linear-gradient(90deg, #ffd1e6, #d94a8c);
+  outline: none;
+}
+#opacitySlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #f5a3c7;
+}
+
+/* Shutter */
+.shutter {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  margin: 25px auto;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15);
+}
+
+/* Corner buttons */
+.corner-btn {
+  position: absolute;
+  bottom: 22px;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  font-size: 18px;
+}
+
+.corner-btn.left { left: 18px; }
+.corner-btn.right { right: 18px; }
+

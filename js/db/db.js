@@ -1,8 +1,9 @@
 export const DB_NAME = "framieDB";
-export const DB_VERSION = 2;
+export const DB_VERSION = 3;
 
 export const STORE_GROUPS = "groups";
 export const STORE_INSPO = "inspoPhotos";
+export const STORE_CAMERA = "cameraPhotos";
 
 // ask browser to open the database
 export function openDB() { 
@@ -25,6 +26,13 @@ export function openDB() {
       // inspo photos store
       if (!db.objectStoreNames.contains(STORE_INSPO)) {
         const store = db.createObjectStore(STORE_INSPO, {keyPath : "id"});
+        store.createIndex("groupId", "groupId", {unique: false});
+        store.createIndex("createdAt", "createdAt", {unique: false});
+      }
+
+      // camera photos store
+      if (!db.objectStoreNames.contains(STORE_CAMERA)){
+        const store = db.createObjectStore(STORE_CAMERA, {keyPath: "id"});
         store.createIndex("groupId", "groupId", {unique: false});
         store.createIndex("createdAt", "createdAt", {unique: false});
       }

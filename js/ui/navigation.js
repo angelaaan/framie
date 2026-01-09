@@ -3,6 +3,7 @@ import { SCREENS, showScreen } from "./screens.js";
 import { renderGroups } from "./groups.js";
 import { addInspoFiles } from "../db/inspoStore.js";
 import { getCurrentGroupId, renderGroupDetail } from "./groupDetail.js";
+import { openCamera } from "./camera.js";
 
 export function initNavigation() {
     //what happens when user clicks [inspo] button from landing page
@@ -62,4 +63,10 @@ export function initNavigation() {
             alert("Could not save inspo photos.");
         }
     });
+
+  // open camera
+  $("openCamera").addEventListener("click", async () => {
+    await openCamera();
+  });
+
 }

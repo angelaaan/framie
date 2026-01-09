@@ -66,6 +66,7 @@
             <button class="btn primary" id="createGroupBtn" disabled>create</button>
         </section>
     </main>
+
     <!--GROUP DETAIL SCREEN-->
     <main class="screen hidden" id="screen-group">
         <header class="topbar">
@@ -81,6 +82,8 @@
         </section>
 
         <button class="fixedButton" id="addInspo" aria-label="+ pics">+inspo</button>
+        <button class="fixedButton" id="openCamera" aria-label="camera">camera</button>
+
         <input
             id="inspoPicker"
             type="file"
@@ -88,8 +91,37 @@
             multiple
             hidden
         />
-
     </main>
+
+    <section id="screen-camera" class="screen hidden">
+        <div class="camera-top">
+            <div id="cameraCarousel" class="carousel"></div>
+        </div>
+
+        <div class="camera-viewport">
+            <video id="cameraVideo" playsinline autoplay muted></video>
+            <img id="cameraOverlay" alt="" />
+        </div>
+
+        <div class="camera-controls">
+            <input
+            id="opacitySlider"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.5"
+            aria-label="Overlay opacity"
+            />
+            <button id="shutterBtn" class="shutter" aria-label="Take photo"></button>
+        </div>
+
+        <button id="cameraBackBtn" class="corner-btn left" aria-label="Back">↩</button>
+        <button id="cameraAlbumBtn" class="corner-btn right" aria-label="Album">☐</button>
+
+        <canvas id="captureCanvas" class="hidden"></canvas>
+    </section>
+
 
     <script type="module" src="./js/main.js"></script>
 </body>
