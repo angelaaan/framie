@@ -20,6 +20,11 @@
    Base
    ========================= */
 
+html, body{
+  height: 100%;
+  overflow: hidden;
+}
+
 body{
   margin: 0;
   font-family: "Winkle", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -207,7 +212,7 @@ h1{
 }
 
 .fixedButton{
-  position: fixed;
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: 40px;
@@ -284,3 +289,35 @@ h1{
   margin: 10px 0px 20px;
 }
 
+/* =========================
+   Group Detail (Inspo Grid)
+   ========================= */
+
+#screen-group{
+  background-image: url("./assets/landing-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.inspoGrid{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  padding: 10px 0 80px; /* bottom padding so +inspo button doesn't cover content */
+}
+
+.inspoCard{
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  border: 3px solid #000;
+  background: rgba(255,255,255,0.75);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}

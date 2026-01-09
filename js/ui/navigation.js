@@ -32,4 +32,16 @@ export function initNavigation() {
         showScreen(SCREENS.inspo);
         await renderGroups();
     });
+
+    // clicking to go back to the inspo groups
+    $("backToGroups").addEventListener("click", async () => {
+        showScreen(SCREENS.inspo);
+        await renderGroups();
+        });
+
+    // add photos
+    $("addInspo").addEventListener("click", () => {
+        alert("Next: add photo picker + save photo to IndexedDB tied to this group!");
+    });
+
 }

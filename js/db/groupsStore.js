@@ -14,6 +14,17 @@ export function listGroups() {
   });
 }
 
+//fetch the group
+export function getGroup(groupId) {
+  return withStore(STORE_GROUPS, "readonly", (store) => {
+    return new Promise((resolve, reject) => {
+      const req = store.get(groupId);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => reject(req.error);
+    });
+  });
+}
+
 export function addGroup(name) {
     const now = Date.now();
     // a normal js object 

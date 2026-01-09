@@ -51,7 +51,7 @@
             <button class="iconBtn" id="backToInspo" aria-label="Back">←</button>
         </header>
         <h1>create group</h1>
-            <span class="iconSpacer" aria-hidden="true"></span>
+        <span class="iconSpacer" aria-hidden="true"></span>
 
         <section class="content">
             <label class="label" for="groupName">GROUP NAME</label>
@@ -65,6 +65,23 @@
             />
             <button class="btn primary" id="createGroupBtn" disabled>create</button>
         </section>
+    </main>
+    <!--GROUP DETAIL SCREEN-->
+    <main class="screen hidden" id="screen-group">
+        <header class="topbar">
+           <button class="iconBtn" id="backToGroups" aria-label="Back">←</button>
+           <span class="iconSpacer" aria-hidden="true"></span>
+        </header>
+
+        <h1 id="groupTitle">group</h1>
+
+        <section class="content">
+            <div class="inspoGrid" id="inspoGrid"></div>
+            <p class="hint" id="emptyInspoHint">No inspo yet ! (╥‸╥) add photos soon !! </p>
+        </section>
+
+        <button class="fixedButton" id="addInspo" aria-label="Add inspo">+inspo</button>
+        
     </main>
 
     <script type="module" src="./js/main.js"></script>

@@ -4,6 +4,7 @@ export const SCREENS = {
   home: "screen-home",
   inspo: "screen-inspo",
   create: "screen-create",
+  group: "screen-group",
 };
 
 export function showScreen(screenId) {

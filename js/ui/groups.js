@@ -1,5 +1,6 @@
 import { $ } from "../utils/dom.js";
-import { listGroups, deleteGroup } from "../db/groupsStore.js";
+import { listGroups, getGroup, deleteGroup } from "../db/groupsStore.js";
+import { showScreen, SCREENS } from "./screens.js";
 
 export async function renderGroups() {
     // grabbing DOM elements
@@ -77,9 +78,33 @@ export async function renderGroups() {
         // Normal tap = open group (but NOT if a long-press already happened)
         card.addEventListener("click", () => {
             if (didLongPress) return; // prevents the click after long press
-            alert(`Open group: ${g.name} (group page next)`);
+            openGroup(g.id);
         });
 
         list.appendChild(card);
   }
+}
+
+export async function renderGroupDetail(groupId) {
+  const title = $("groupTitle");
+  const grid = $("inspoGrid");
+  const emptyHint = $("emptyInspoHint");
+
+  grid.innerHTML = "";
+
+  const group = await getGroup(groupId);
+  title.textContent = group ? group.name : "group";
+
+  // TODO later: load photos for this group from a photos store
+  // for now: show empty state
+  emptyHint.classList.remove("hidden");
+}
+
+
+let currentGroupId = null;
+
+export async function openGroup(groupId) {
+    currentGroupId = groupId;
+    showScreen(SCREENS.group);
+    await renderGroupDetail(groupId);
 }
