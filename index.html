@@ -77,11 +77,18 @@
 
         <section class="content">
             <div class="inspoGrid" id="inspoGrid"></div>
-            <p class="hint" id="emptyInspoHint">No inspo yet ! (╥‸╥) add photos soon !! </p>
+            <p class="hint" id="emptyInspoHint">No inspo yet! (╥‸╥) add photos soon !! </p>
         </section>
 
-        <button class="fixedButton" id="addInspo" aria-label="Add inspo">+inspo</button>
-        
+        <button class="fixedButton" id="addInspo" aria-label="+ pics">+inspo</button>
+        <input
+            id="inspoPicker"
+            type="file"
+            accept="image/*"
+            multiple
+            hidden
+        />
+
     </main>
 
     <script type="module" src="./js/main.js"></script>

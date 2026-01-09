@@ -1,6 +1,8 @@
 import { $ } from "../utils/dom.js";
 import { SCREENS, showScreen } from "./screens.js";
 import { renderGroups } from "./groups.js";
+import { addInspoFiles } from "../db/inspoStore.js";
+import { getCurrentGroupId, renderGroupDetail } from "./groupDetail.js";
 
 export function initNavigation() {
     //what happens when user clicks [inspo] button from landing page
@@ -39,9 +41,25 @@ export function initNavigation() {
         await renderGroups();
         });
 
-    // add photos
+    // open camera roll picker
     $("addInspo").addEventListener("click", () => {
-        alert("Next: add photo picker + save photo to IndexedDB tied to this group!");
+        $("inspoPicker").click();
     });
 
+    // when user picks images
+    $("inspoPicker").addEventListener("change", async (e) => {
+        const groupId = getCurrentGroupId();
+        const files = e.target.files;
+
+        if (!groupId || !files || !files.length) return;
+
+        try {
+            await addInspoFiles(groupId, files);
+            e.target.value = ""; // allow picking same file again later
+            await renderGroupDetail();
+        } catch (err) {
+            console.error(err);
+            alert("Could not save inspo photos.");
+        }
+    });
 }
