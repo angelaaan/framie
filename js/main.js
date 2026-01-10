@@ -25,21 +25,6 @@ function blockIOSPinchZoom() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  blockIOSPinchZoom();
-
-  // ensure DB is ready
-  await openDB();
-  await ageCameraPhotos();
-
-  initNavigation();
-  initCreateGroup();
-  initCameraScreen();
-  initAlbumScreen();
-
-  showScreen(SCREENS.home);
-});
-
-document.addEventListener("DOMContentLoaded", async () => {
   // ensure DB is ready
   await openDB();
   await ageCameraPhotos();

@@ -24,7 +24,7 @@ html, body{
   height: 100%;
   width: 100%;
   margin: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   background: rgb(255, 241, 252);
   overscroll-behavior: none;
 }
@@ -72,12 +72,14 @@ h3{
    ========================= */
 
 .screen{
-  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .hidden{
@@ -227,11 +229,12 @@ h3{
   background-repeat: no-repeat;
 }
 
-/* Allow scrolling ONLY on inspo screen */
-#screen-inspo{
-  overflow-y: auto;      /* can scroll */
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
+/* allow scrolling only where content can exceed screen */
+#screen-inspo,
+#screen-group,
+#screen-album{
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .fixedButton{
