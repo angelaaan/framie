@@ -6,6 +6,16 @@ import { initCameraScreen } from "./ui/camera.js";
 import { initAlbumScreen } from "./ui/album.js";
 const MAX_LIFESPAN = 10;
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .then((reg) => {
+        reg.update();
+      });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   // ensure DB is ready
   await openDB();

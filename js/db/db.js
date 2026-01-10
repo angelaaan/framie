@@ -1,5 +1,5 @@
 export const DB_NAME = "framieDB";
-export const DB_VERSION = 3;
+export const DB_VERSION = 4;
 
 export const STORE_GROUPS = "groups";
 export const STORE_INSPO = "inspoPhotos";
