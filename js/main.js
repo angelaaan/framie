@@ -25,6 +25,8 @@ function blockIOSPinchZoom() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  blockIOSPinchZoom()
+  
   // ensure DB is ready
   await openDB();
   await ageCameraPhotos();
