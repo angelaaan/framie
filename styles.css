@@ -22,8 +22,18 @@
 
 html, body{
   height: 100%;
+  width: 100%;
+  margin: 0;
   overflow-x: hidden;
-  overflow-y: auto;
+  background: rgb(255, 241, 252);
+  overscroll-behavior: none;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: rgb(255, 241, 252);
 }
 
 body{

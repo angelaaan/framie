@@ -16,6 +16,29 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+function blockIOSPinchZoom() {
+  const block = (e) => e.preventDefault();
+
+  document.addEventListener("gesturestart", block, { passive: false });
+  document.addEventListener("gesturechange", block, { passive: false });
+  document.addEventListener("gestureend", block, { passive: false });
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  blockIOSPinchZoom();
+
+  // ensure DB is ready
+  await openDB();
+  await ageCameraPhotos();
+
+  initNavigation();
+  initCreateGroup();
+  initCameraScreen();
+  initAlbumScreen();
+
+  showScreen(SCREENS.home);
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
   // ensure DB is ready
   await openDB();
