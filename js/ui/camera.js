@@ -21,15 +21,63 @@ function revokeOverlayUrl() {
 async function startCamera() {
   stopCamera();
 
-  //invokes the devices camera
-  stream = await navigator.mediaDevices.getUserMedia({
-    video: { facingMode },
-    audio: false,
-  });
-
   const video = $("cameraVideo");
+  video.setAttribute("playsinline", "");
+  video.muted = true;
+
+  // Try higher quality first, then gracefully fall back
+  const tries = [
+    {
+      audio: false,
+      video: {
+        facingMode: { ideal: facingMode }, // "environment" preferred
+        width: { ideal: 3840 },
+        height: { ideal: 2160 },
+        frameRate: { ideal: 30 }
+      }
+    },
+    {
+      audio: false,
+      video: {
+        facingMode: { ideal: facingMode },
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+        frameRate: { ideal: 30 }
+      }
+    }
+  ];
+
+  let lastErr;
+  for (const constraints of tries) {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia(constraints);
+      break;
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  if (!stream) throw lastErr;
+
   video.srcObject = stream;
   await video.play();
+
+  // 🔎 Optional debug: see what you actually got
+  const track = stream.getVideoTracks()[0];
+  console.log("track settings:", track.getSettings?.());
+
+  // Try continuous focus/exposure if supported (often limited on iOS)
+  try {
+    const caps = track.getCapabilities?.() || {};
+    const advanced = [];
+
+    if (caps.focusMode?.includes?.("continuous")) advanced.push({ focusMode: "continuous" });
+    if (caps.exposureMode?.includes?.("continuous")) advanced.push({ exposureMode: "continuous" });
+    if (caps.whiteBalanceMode?.includes?.("continuous")) advanced.push({ whiteBalanceMode: "continuous" });
+
+    if (advanced.length) await track.applyConstraints({ advanced });
+  } catch (e) {
+    console.log("Advanced constraints not supported:", e);
+  }
 }
 
 //stopping real device camera
@@ -120,7 +168,7 @@ async function captureToBlob() {
 
   //converts to jpeg blob
   return await new Promise((resolve) => {
-    canvas.toBlob(resolve, "image/jpeg", 0.92);
+    canvas.toBlob(resolve, "image/jpeg", 0.97);
   });
 }
 
