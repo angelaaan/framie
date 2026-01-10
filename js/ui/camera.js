@@ -51,7 +51,7 @@ async function renderCarousel(groupId) {
   // if none, show a lil hint so it doesn't look broken
   if (!photos.length) {
     const msg = document.createElement("div");
-    msg.textContent = "no inspo yet ˙ᵕ˙";
+    msg.textContent = "no inspo yet !!! add some and they will appear here !";
     msg.style.color = "rgba(255,255,255,0.7)";
     msg.style.fontSize = "14px";
     msg.style.padding = "8px 2px";

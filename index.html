@@ -36,12 +36,13 @@
         <header class="topbar">
             <button class="iconBtn" id="backHome" aria-label="Back">←</button>
         </header>
-        <h1>inspos</h1>
+        <h1>inspo boards</h1>
         <button class="fixedButton" id="newGroup" aria-label="New group">+group</button>
         <!--IF THERE IS NO GROUPS-->
         <section class="content">
             <div class="groups" id="groupsList"></div>
-            <p class="hint" id="emptyHint">No groups yet!! Tap + to add one.</p>
+            <h3 id="deleteGroupHint" class="hidden">hold down to delete group !</h3>
+            <p class="hint" id="emptyHint">No groups yet ( • ᴖ • ｡) Tap + to add one.</p>
         </section>
     </main>
 
@@ -78,7 +79,7 @@
 
         <section class="content">
             <div class="inspoGrid" id="inspoGrid"></div>
-            <p class="hint" id="emptyInspoHint">No inspo yet! (╥‸╥) add photos soon !! </p>
+            <p class="hint" id="emptyInspoHint">why so empty .. (╥‸╥) add your inspo! !! </p>
         </section>
 
         <button class="fixedButton" id="addInspo" aria-label="+ pics">+inspo</button>
@@ -131,11 +132,11 @@
         </header>
 
         <h1>album</h1>
-        <p class="sub">remember to save your photos !! </p>
+        <h2 id="saveForeverHint" class="hidden"> save to keep our pics forever ♡</h2>
 
         <section class="content">
             <div class="inspoGrid" id="albumGrid"></div>
-            <p class="hint hidden" id="emptyAlbumHint">No photos yet ˙ᵕ˙</p>
+            <p class="hint hidden" id="emptyAlbumHint">no photos yet o(╥﹏╥)o ... take pics so they appear here !</p>
         </section>
     </main>
 

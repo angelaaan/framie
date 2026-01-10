@@ -7,6 +7,7 @@ export async function renderGroups() {
     // grabbing DOM elements
     const list = $("groupsList");
     const emptyHint = $("emptyHint"); //no groups yet msg
+    const deleteHint = $("deleteGroupHint");//advanced hint
 
     // clearing the list which wipes the existing buttons to prevent dupes
     // makes re-rendering safe
@@ -14,12 +15,15 @@ export async function renderGroups() {
 
     // rendering waits for the data before touching the ODM
     const groups = await listGroups();
-    //empty state handling
+    //empty state hint handling
     if (!groups.length) { // if no groups
         emptyHint.classList.remove("hidden");
+        deleteHint.classList.add("hidden");
         return;
-    } // stop rendering 
-    emptyHint.classList.add("hidden");
+    } else {
+        emptyHint.classList.add("hidden");
+        deleteHint.classList.remove("hidden");
+    }
 
     // sort by newest first
     groups.sort((a, b) => b.createdAt - a.createdAt);

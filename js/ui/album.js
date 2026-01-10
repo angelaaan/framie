@@ -99,6 +99,7 @@ async function saveCurrentToGallery() {
 export async function renderAlbum() {
   const grid = $("albumGrid");
   const emptyHint = $("emptyAlbumHint");
+  const saveHint = $("saveForeverHint");
 
   if (!grid) return;
 
@@ -118,11 +119,14 @@ export async function renderAlbum() {
   // newest first
   photos.sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0));
 
+  //show hints
   if (!photos.length) {
-    emptyHint?.classList.remove("hidden");
+    emptyHint.classList.remove("hidden");
+    saveHint?.classList.add("hidden");
     return;
   }
-  emptyHint?.classList.add("hidden");
+  emptyHint.classList.add("hidden");
+  saveHint?.classList.remove("hidden");
 
   for (const p of photos) {
     if (!p?.blob) continue;

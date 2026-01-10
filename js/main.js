@@ -4,7 +4,7 @@ import { initCreateGroup } from "./ui/createGroup.js";
 import { SCREENS, showScreen } from "./ui/screens.js";
 import { initCameraScreen } from "./ui/camera.js";
 import { initAlbumScreen } from "./ui/album.js";
-const MAX_LIFESPAN = 7;
+const MAX_LIFESPAN = 10;
 
 document.addEventListener("DOMContentLoaded", async () => {
   // ensure DB is ready
