@@ -270,6 +270,21 @@ h3{
   text-transform: lowercase;
 }
 
+/* iOS Safari link-blue fix inside group cards */
+.groupCard,
+.groupCard * {
+  color: #000;
+  -webkit-text-fill-color: #000; /* extra iOS stubbornness */
+}
+
+.groupCard a,
+.groupCard a:visited,
+.groupCard a:hover,
+.groupCard a:active {
+  color: #000;
+  text-decoration: none;
+}
+
 /* hint text */
 .hint{
   margin: 10px 0 0;
@@ -519,7 +534,7 @@ h3{
 .corner-btn.left { left: 18px; }
 .corner-btn.right { right: 18px; }
 .corner-btn.mid {
-  left: 50%;
+  left: 75%;
   transform: translateX(-50%);
 }
 

@@ -23,7 +23,7 @@ export async function renderGroups() {
     } else {
         emptyHint.classList.add("hidden");
         deleteHint.classList.remove("hidden");
-    }
+        }
 
     // sort by newest first
     groups.sort((a, b) => b.createdAt - a.createdAt);

@@ -1,0 +1,20 @@
+{
+  "name": "Framie",
+  "short_name": "Framie",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff1fc",
+  "theme_color": "#fff1fc",
+  "icons": [
+    {
+      "src": "./assets/framie-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/framie-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
