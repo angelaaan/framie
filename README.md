@@ -78,5 +78,6 @@ This is intentional :3
 
 ---
 
-Made with love & chaos ♡
+Made with love ♡
+
 
