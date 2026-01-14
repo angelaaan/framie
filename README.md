@@ -8,7 +8,6 @@
 ---
 ────୨ৎ────
 ## ⊹ ࣪ ˖ What is Framie? ⊹ ࣪ ˖
-────୨ৎ────
 Framie is a PWA that lets you:
 - Use your phone camera
 - Overlay inspiration photos
@@ -80,3 +79,4 @@ This is intentional :3
 ---
 
 Made with love & chaos ♡
+
