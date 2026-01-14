@@ -5,6 +5,7 @@
 import { $ } from "../utils/dom.js";
 import { SCREENS, showScreen } from "./screens.js";
 import { STORE_CAMERA, withStore } from "../db/db.js";
+import { openCamera } from "./camera.js";
 
 let currentViewerUrl = null;
 let currentPhoto = null;
@@ -158,16 +159,38 @@ export async function openAlbum() {
 }
 
 export function initAlbumScreen() {
-  // back to home from album (if your HTML has this id)
   const backBtn = $("backToHomeFromAlbum");
-  backBtn?.addEventListener("click", () => {
+  const backToCameraBtn = $("backToCameraFromAlbum");
+
+  const from = sessionStorage.getItem("albumFrom");
+  const groupId = sessionStorage.getItem("albumGroupId");
+
+  // only show camera-back button if we came from camera
+  if (from === "camera") {
+    backToCameraBtn?.classList.remove("hidden");
+  } else {
+    backToCameraBtn?.classList.add("hidden");
+  }
+
+  // back button behavior:
+  backBtn?.addEventListener("click", async () => {
     closeViewer();
+
+    if (sessionStorage.getItem("albumFrom") === "camera") {
+      // go back to camera for that group context
+      await openCamera(); // uses getCurrentGroupId() internally :contentReference[oaicite:5]{index=5}
+      return;
+    }
+
     showScreen(SCREENS.home);
   });
 
-  // viewer close
-  $("closeViewer")?.addEventListener("click", closeViewer);
+  // explicit "📷" button goes back to camera too
+  backToCameraBtn?.addEventListener("click", async () => {
+    closeViewer();
+    await openCamera();
+  });
 
-  // save
+  $("closeViewer")?.addEventListener("click", closeViewer);
   $("saveToGalleryBtn")?.addEventListener("click", saveCurrentToGallery);
 }

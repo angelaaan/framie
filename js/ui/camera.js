@@ -59,6 +59,9 @@ async function startCamera() {
   if (!stream) throw lastErr;
 
   video.srcObject = stream;
+  // mirror ONLY the selfie preview
+  if (facingMode === "user") video.classList.add("mirror");
+  else video.classList.remove("mirror");
   await video.play();
 
   // 🔎 Optional debug: see what you actually got

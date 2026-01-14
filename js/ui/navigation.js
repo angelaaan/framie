@@ -15,12 +15,18 @@ export function initNavigation() {
 
     //what happens when user clicks [album] button from landing page
     $("goAlbumHome").addEventListener("click", async () => {
+        sessionStorage.removeItem("albumFrom");
+        sessionStorage.removeItem("albumGroupId");
+
         showScreen(SCREENS.album);
         await openAlbum();
     });
     $("goAlbumCamera").addEventListener("click", async () => {
-        console.log("SCREENS =", SCREENS);
-        console.log("album clicked");
+        const groupId = getCurrentGroupId();
+        // remember we came from camera (and which group)
+        sessionStorage.setItem("albumFrom", "camera");
+        if (groupId) sessionStorage.setItem("albumGroupId", groupId);
+
         showScreen(SCREENS.album);
         await openAlbum();
     });

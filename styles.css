@@ -376,6 +376,10 @@ h3{
   left: auto;
 }
 
+.mirror {
+  transform: scaleX(-1);
+}
+
 .inspoGrid{
   width: 100%;
   display: grid;
